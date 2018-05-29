@@ -13,10 +13,17 @@
       <input v-model="newComment" v-on:keyup.enter="addComment" placeholder="Add a Comment">
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
+    <script type="text/x-template" id="comment-template">
+      <li> 
+          <img class="post-img" :src="commentpost.authorImg" /> 
+        <small>{{ commentpost.author }}</small>
+        <p class="post-comment">"{{ commentpost.text }}"</p>
+      </li>
+      </script>
     <script>
 
       Vue.component('individual-comment', {
-        template: `<li>{{ commentpost }}</li>`,
+        template: '#comment-template',
         props: ['commentpost']
       });
 
@@ -25,14 +32,31 @@
         data: {
           newComment: '',
           comments: [
-            'Looks great Julianne!',
-            'I love the sea',
-            'Where are you at?'
+            { 
+              text: 'Looks great Julianne!',
+              author: 'Robin Rendle',
+              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-coffee.jpg'
+            },
+            { 
+              text: 'I love the Sea',
+              author: 'Miriam Suzanne',
+              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-miriam.jpg'
+            },
+            { 
+              text: 'Where are you?',
+              author: 'Geoff Graham',
+              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-geoff.jpg'
+            }
           ]
         },
         methods: {
           addComment: function(){
-            this.comments.push(this.newComment);
+            const newCommentObj = {
+              text: this.newComment,
+              author: 'Magoo',
+              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-skull.jpg'
+            };
+            this.comments.push(newCommentObj);
             this.newComment = '';
           }
         }
