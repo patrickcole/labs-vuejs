@@ -5,12 +5,25 @@
     <title>Intro to Vue.js: Components, Props and Slots</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <child :text="message"></child>
+      <child :text="message"></child>
+    </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script>
+
+      Vue.component('child', {
+        props: ['text'],
+        template: `<div>{{ text }}</div>`
+      });
+
       new Vue({
         el: '#app',
-        template: '<h1>Hello World!</h1>'
+        data(){
+          return {
+            message: 'hello mr. magoo'
+          }
+        }
       });
     </script>
   </body>
