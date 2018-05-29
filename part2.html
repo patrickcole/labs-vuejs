@@ -6,59 +6,32 @@
   </head>
   <body>
     <div id="app">
-      <ul>
-        <li is="individual-comment" v-for="comment in comments" v-bind:commentpost="comment"></li>
-      </ul>
-      <hr>
-      <input v-model="newComment" v-on:keyup.enter="addComment" placeholder="Add a Comment">
+      <h2>We can use slots to populate content</h2>
+      <app-child>
+        <h3>This is slot number one</h3>
+      </app-child>
+      <app-child>
+        <h3>This is slot number two</h3>
+        <small>I can put more info in, too!</small>
+      </app-child>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
-    <script type="text/x-template" id="comment-template">
-      <li> 
-          <img class="post-img" :src="commentpost.authorImg" /> 
-        <small>{{ commentpost.author }}</small>
-        <p class="post-comment">"{{ commentpost.text }}"</p>
-      </li>
-      </script>
+    <script type="text/x-template" id="childarea">
+      <div class="child">
+        <slot></slot>
+        <p>It's a veritable slot machine!<br>
+          Ha ha aw</p>
+      </div>
+    </script>
     <script>
-
-      Vue.component('individual-comment', {
-        template: '#comment-template',
-        props: ['commentpost']
-      });
-
+      const Child = {
+        template: '#childarea'
+      };
+      
       new Vue({
         el: '#app',
-        data: {
-          newComment: '',
-          comments: [
-            { 
-              text: 'Looks great Julianne!',
-              author: 'Robin Rendle',
-              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-coffee.jpg'
-            },
-            { 
-              text: 'I love the Sea',
-              author: 'Miriam Suzanne',
-              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-miriam.jpg'
-            },
-            { 
-              text: 'Where are you?',
-              author: 'Geoff Graham',
-              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-geoff.jpg'
-            }
-          ]
-        },
-        methods: {
-          addComment: function(){
-            const newCommentObj = {
-              text: this.newComment,
-              author: 'Magoo',
-              authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-skull.jpg'
-            };
-            this.comments.push(newCommentObj);
-            this.newComment = '';
-          }
+        components: {
+          appChild: Child
         }
       });
     </script>
