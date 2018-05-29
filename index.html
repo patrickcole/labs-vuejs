@@ -6,23 +6,18 @@
   </head>
   <body>
     <div id="app">
-      <ul>
-        <li v-for="item in items">
-          {{ item }}
-        </li>
-      </ul>
+      <h3>Type here:</h3>
+      <textarea v-model="message" class="message" rows="5" maxlength="72"></textarea><br>
+      <p class="booktext">{{ message }}</p>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script>
       new Vue({
         el: '#app',
-        data: {
-          items: [
-            'thingie',
-            'another thingie',
-            'lots of stuff',
-            'yadda yadda'
-          ]
+        data() {
+          return {
+            message: 'This is a good place to type things.'
+          }
         }
       });
     </script>
