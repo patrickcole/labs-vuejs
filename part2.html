@@ -6,32 +6,34 @@
   </head>
   <body>
     <div id="app">
-      <h2>We can use slots to populate content</h2>
-      <app-child>
-        <h3>This is slot number one</h3>
-      </app-child>
-      <app-child>
-        <h3>This is slot number two</h3>
-        <small>I can put more info in, too!</small>
-      </app-child>
+      <h2>User Comments</h2>
+      <ul>
+        <user-comment v-for="comment in comments">{{comment}}</user-comment>
+      </ul>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
-    <script type="text/x-template" id="childarea">
-      <div class="child">
+    <script type="text/x-template" id="coolCommentTemplate">
+      <li class="child">
         <slot></slot>
-        <p>It's a veritable slot machine!<br>
-          Ha ha aw</p>
-      </div>
+      </li>
     </script>
     <script>
-      const Child = {
-        template: '#childarea'
+      const CoolComment = {
+        template: '#coolCommentTemplate'
       };
       
       new Vue({
         el: '#app',
         components: {
-          appChild: Child
+          userComment: CoolComment
+        },
+        data(){
+          return {
+            comments: [
+              'This is slot number one',
+              'This is slot number two'
+            ]
+          }
         }
       });
     </script>
