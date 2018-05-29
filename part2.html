@@ -13,7 +13,12 @@
     <script>
 
       Vue.component('child', {
-        props: ['text'],
+        props: {
+          text: {
+            type: String,
+            required: true
+          }
+        },
         template: `<div>{{ text }}</div>`
       });
 
