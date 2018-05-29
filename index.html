@@ -6,9 +6,7 @@
   </head>
   <body>
     <div id="app">
-      <h3>Type here:</h3>
-      <textarea v-model="message" class="message" rows="5" maxlength="72"></textarea><br>
-      <p class="booktext">{{ message }}</p>
+      <p><button @click="increment">+</button> {{ counter }}</p>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script>
@@ -16,7 +14,12 @@
         el: '#app',
         data() {
           return {
-            message: 'This is a good place to type things.'
+            counter: 0
+          }
+        },
+        methods: {
+          increment(){
+            this.counter++;
           }
         }
       });
