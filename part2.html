@@ -6,28 +6,42 @@
   </head>
   <body>
     <div id="app">
-      <child :text="message"></child>
-      <child :text="message"></child>
+      <h3>
+        <button @click="increment">+</button>
+        Adjust the state
+        <button @click="decrement">-</button>
+      </h3>
+      <h2>This is the app state: <span class="num">{{ count }}</span></h2>
+      <hr>
+      <h4><child count="1"></child></h4>
+      <p>This is the child counter that is using a static integer as props.</p>
+      <hr>
+      <h4><child :count="count"></child></h4>
+      <p>This is the same child coutner and it is using the state as props.</p>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script>
 
       Vue.component('child', {
         props: {
-          text: {
-            type: String,
+          count: {
+            type: Number,
             required: true
           }
         },
-        template: `<div>{{ text }}</div>`
+        template: `<div class="num">{{ count }}</div>`
       });
 
       new Vue({
         el: '#app',
         data(){
           return {
-            message: 'hello mr. magoo'
+            count: 0
           }
+        },
+        methods: {
+          increment(){ this.count++; },
+          decrement(){ this.count--; }
         }
       });
     </script>
