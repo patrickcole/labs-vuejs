@@ -5,9 +5,17 @@
     <title>Intro to Vue.js: Rendering, Directives and Events</title>
   </head>
   <body>
+    <div id="app">
+      {{ text }} Nice to meet Vue.
+    </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script>
-      
+      new Vue({
+        el: '#app',
+        data: {
+          text: 'Hello World!'
+        }
+      });
     </script>
   </body>
 </html>
