@@ -8,12 +8,16 @@
     <div id="app">
       <h2>User Comments</h2>
       <ul>
-        <user-comment v-for="comment in comments">{{comment}}</user-comment>
+        <user-comment v-for="comment in comments">
+          <span slot="author">{{comment.author}}</span><br />
+          {{comment.body}}
+        </user-comment>
       </ul>
     </div>
     <script src="src/vue.2.5.13.min.js"></script>
     <script type="text/x-template" id="coolCommentTemplate">
       <li class="child">
+        <slot name="author">Anonymous</slot>
         <slot></slot>
       </li>
     </script>
@@ -30,8 +34,8 @@
         data(){
           return {
             comments: [
-              'This is slot number one',
-              'This is slot number two'
+              { author: 'Patrick', body: 'This is slot number one' },
+              { author: 'User', body: 'This is slot number two' }
             ]
           }
         }
